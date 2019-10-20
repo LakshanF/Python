@@ -30,4 +30,4 @@ for n1 in range(999,1,-1):
                 largestPalNum = number
 
 print('%d is a palindrome' %(largestPalNum))
-print("--- %s seconds ---" % (time.time() - start_time))
+print('--- %s seconds ---' % (time.time() - start_time))

@@ -27,5 +27,5 @@ for num in range(1, 101):
 
 diff = sum*sum - sumOfSquares
 
-print("Sum square difference %d" %(diff))
-print("--- %s seconds ---" % (time.time() - start_time))
+print('Sum square difference %d' %(diff))
+print('--- %s seconds ---' % (time.time() - start_time))

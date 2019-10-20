@@ -20,5 +20,5 @@ while True:
         break
     number += 1
 
-print("Found Number %d" %(number))
-print("--- %s seconds ---" % (time.time() - start_time))
+print('Found Number %d' %(number))
+print('--- %s seconds ---' % (time.time() - start_time))

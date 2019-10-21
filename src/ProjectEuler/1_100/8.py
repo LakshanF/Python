@@ -29,4 +29,11 @@
 import time
 start_time = time.time()
 
+allDigits=''
+f = open('./src/ProjectEuler/1_100/8.txt', 'r')
+for x in f:
+    allDigits += ''.join(i for i in x if i.isdigit())
+print(allDigits)
+print(int('6'))
+
 print('--- %s seconds ---' % (time.time() - start_time))

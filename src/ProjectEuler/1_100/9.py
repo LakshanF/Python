@@ -7,8 +7,6 @@
 # 
 # There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 # Find the product abc.
-# 
-# 31875000
 #
 # a * b * c = 31875000
 # --- 0.07599973678588867 seconds ---

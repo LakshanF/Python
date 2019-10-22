@@ -34,6 +34,26 @@ f = open('./src/ProjectEuler/1_100/8.txt', 'r')
 for x in f:
     allDigits += ''.join(i for i in x if i.isdigit())
 print(allDigits)
-print(int('6'))
+print(len(allDigits))
 
+
+sum=1
+for c in allDigits[:13]:
+    sum *= int(c)
+
+maxSumValue=sum
+print(sum)
+
+for index in range(13, 1000):
+    firstValue = int(allDigits[index-13:index-12])
+    if firstValue != 0:
+        sum /= firstValue
+    sum *= int(allDigits[index:index+1])
+    if sum==0:
+        sum=1
+    if sum > maxSumValue:
+        maxSumValue = sum
+
+
+print('Largest product in a series is %d' %(maxSumValue))
 print('--- %s seconds ---' % (time.time() - start_time))

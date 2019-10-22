@@ -23,8 +23,20 @@
 # 71636269561882670428252483600823257530420752963450
 #
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this product?
+# 
+# LEARNINGS
+#   - Python seems to manage its number types, int and long in a transparent way.
+#   - The first approach of digit manipulation didnt work
+#       * sum = Get the initial value of multiplying the first 13 characters converted to int
+#       * from index: 14th position to 1000th
+#           * divide sum with (index-13)th digit (if 0, set sum to 1)
+#           * multiply with the index digit
+#           * if new value > previous
+#               * set max to new value
+#   - Didnt fully debug but likely an issue with data type conversion when sum is divided by int (double)
 #
-# 23514624000
+# Largest product in a series is 23514624000
+# --- 0.00700068473815918 seconds ---
 
 import time
 start_time = time.time()
@@ -33,27 +45,16 @@ allDigits=''
 f = open('./src/ProjectEuler/1_100/8.txt', 'r')
 for x in f:
     allDigits += ''.join(i for i in x if i.isdigit())
-print(allDigits)
-print(len(allDigits))
 
-
-sum=1
-for c in allDigits[:13]:
-    sum *= int(c)
-
-maxSumValue=sum
-print(sum)
-
-for index in range(13, 1000):
-    firstValue = int(allDigits[index-13:index-12])
-    if firstValue != 0:
-        sum /= firstValue
-    sum *= int(allDigits[index:index+1])
-    if sum==0:
-        sum=1
+maxSumValue=0
+for i in range(0, 988):
+    sum=1
+    for c in allDigits[i:i+13]:
+        sum *= int(c)
     if sum > maxSumValue:
         maxSumValue = sum
 
-
 print('Largest product in a series is %d' %(maxSumValue))
 print('--- %s seconds ---' % (time.time() - start_time))
+
+

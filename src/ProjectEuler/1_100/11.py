@@ -28,14 +28,18 @@
 # 
 # What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 # 
-# 
-# 70600674
+# Maximum product is 70600674
+# --- 0.01000070571899414 seconds ---
 
 import time
 from functools import reduce
 import sys
+import numpy as np
 
 start_time = time.time()
+
+max_column=20
+max_row=20
 
 #contains the 20x20 grid
 grid = []
@@ -45,20 +49,38 @@ for x in f:
     row = [int(i) for i in x.split(' ')]
     grid.append(row)
 
-max_column=20
-max_row=20
+# using a np array is much easier
+np_grid = np.array(grid)
 
 max_product=0
 for row in range(20):
     for column in range(20):
-        #right - assumes left is not needed
+        # right - assumes left is not needed
         if column < (max_column-4):
-            prod = reduce(lambda x, y: x*y, grid[row][column:(column + 4)])
+            prod = reduce(lambda x, y: x*y, np_grid[row, column:(column + 4)])
             if prod > max_product:
                 max_product = prod
-        #down - assume up is not needed
-        #if row < (max_row-4):
-        #@TODO - easy way to get a column from this grid
+        # down - assume up is not needed
+        if row < (max_row-4):
+            prod = reduce(lambda x, y: x*y, np_grid[row:(row + 4), column])
+            if prod > max_product:
+                max_product = prod
+        # diagonal - NW to SE
+        # START: 2nd row, 2nd column END: max_row-3, max_column-3
+        if (row > 0 and row < (max_row-2)) and (column > 0 and column < (max_column-2)):
+            #clever np way to do this?
+            #prod =  np_grid[(row-1), (column-1)] * np_grid[(row), (column)] * np_grid[(row+1), (column+1)] * np_grid[(row+2), (column+2)] 
+            prod =  np_grid[(row-1), (column-1)] * np_grid[(row), (column)] * np_grid[(row+1), (column+1)] * np_grid[(row+2), (column+2)] 
+            if prod > max_product:
+                max_product = prod
+        # diagonal - SW to NE
+        # START: 3rd row, 2nd column END: max_row-2, max_column-3
+        if (row > 1 and row < (max_row-1)) and (column > 0 and column < (max_column-2)):
+            #clever np way to do this?
+            prod =  np_grid[(row+1), (column-1)] * np_grid[(row), (column)] * np_grid[(row-1), (column+1)] * np_grid[(row-2), (column+2)] 
+            if prod > max_product:
+                max_product = prod
+
 
 print('Maximum product is %d' %(max_product))
 print('--- %s seconds ---' % (time.time() - start_time))

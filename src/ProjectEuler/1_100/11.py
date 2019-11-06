@@ -32,6 +32,33 @@
 # 70600674
 
 import time
+from functools import reduce
+import sys
+
 start_time = time.time()
 
+#contains the 20x20 grid
+grid = []
+
+f = open('./src/ProjectEuler/1_100/11.txt', 'r')
+for x in f:
+    row = [int(i) for i in x.split(' ')]
+    grid.append(row)
+
+max_column=20
+max_row=20
+
+max_product=0
+for row in range(20):
+    for column in range(20):
+        #right - assumes left is not needed
+        if column < (max_column-4):
+            prod = reduce(lambda x, y: x*y, grid[row][column:(column + 4)])
+            if prod > max_product:
+                max_product = prod
+        #down - assume up is not needed
+        #if row < (max_row-4):
+        #@TODO - easy way to get a column from this grid
+
+print('Maximum product is %d' %(max_product))
 print('--- %s seconds ---' % (time.time() - start_time))

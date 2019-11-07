@@ -102,9 +102,18 @@
 # 20849603980134001723930671666823555245252804609722
 # 53503534226472524250874054075591789781264330331690
 #
-# 5537376230
+# The first 10 digit of the sum is 5537376230
+# --- 0.0020012855529785156 seconds ---
 
 import time
 start_time = time.time()
+
+numbers = []
+
+f = open('./src/ProjectEuler/1_100/13.txt', 'r')
+for x in f:
+    numbers.append(int(x))
+
+print('The first 10 digit of the sum is %s' %(str(sum(numbers))[:10]))
 
 print('--- %s seconds ---' % (time.time() - start_time))

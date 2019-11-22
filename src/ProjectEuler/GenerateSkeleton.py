@@ -2,7 +2,7 @@
 
 outDir='./src/ProjectEuler/1_100/'
 
-for suffix in range(18, 21):
+for suffix in range(21, 24):
     fileName = outDir + str(suffix) + '.py'
     f = open(fileName, 'w')
     for i in range(5):
